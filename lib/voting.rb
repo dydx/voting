@@ -18,19 +18,9 @@ module Voting
   end
 
   class Candidate
-    attr_reader :id, :first_name, :last_name, :votes
-    def initialize(id:, first_name:, last_name:)
-      if !id.instance_of? Fixnum
-        raise ArgumentError, "Invalid Candidate ID Given"
-      elsif !first_name.instance_of? String
-        raise ArgumentError, "Invalid First Name Given"
-      elsif !last_name.instance_of? String
-        raise ArgumentError, "Invalid Last Name Given"
-      end
-
+    attr_reader :id, :votes
+    def initialize(id)
       @id = id
-      @first_name = first_name
-      @last_name = last_name
       @votes = 0
     end
 
@@ -44,6 +34,23 @@ module Voting
   end
 
   class Tally
+    def initialize(candidates, ballots)
+      if !candidates.all? { |c| c.instance_of? Candidate }
+        raise ArgumentError, "Invalid Candidate List Given"
+      elsif !ballots.all? { |c| c.instance_of? Ballot }
+        raise ArgumentError, "Invalid Ballot List Given"
+      end
 
+      @candidates = candidates
+      @ballots = ballots
+    end
+
+    def winner
+      @candidates.each do |candidate|
+        @ballots.each do |ballot|
+          candidate.tally(ballot.choices.index(candidate.id))
+        end
+      end.sort_by { |candidate| -candidate.votes }.first
+    end
   end
 end
