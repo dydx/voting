@@ -1,4 +1,5 @@
 # Voting
+[![Build Status](https://travis-ci.org/dydx/voting.svg?branch=master)](https://travis-ci.org/dydx/voting)
 
 Instant runoff voting stuff
 
