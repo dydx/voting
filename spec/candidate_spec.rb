@@ -3,14 +3,11 @@ require_relative '../lib/voting'
 describe Voting::Candidate do
   describe ".new" do
     it "accepts the correct parameters" do
-      candidate = Voting::Candidate.new(
+      expect{Voting::Candidate.new(
         id: 1, 
         first_name: 'First', 
         last_name: 'Last'
-      )
-      expect(candidate.id).to eql 1
-      expect(candidate.first_name).to eql 'First'
-      expect(candidate.last_name).to eql 'Last'
+      )}.to_not raise_error
     end
 
     it "raises an exception with non-integer id's" do
