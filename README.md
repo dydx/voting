@@ -27,6 +27,10 @@ Candidates are represented like this:
 > candidate = Voting::Candidate.new(1)
 > ```
 
+The only parameter passed into the initializer is the `id` that you'd like to
+associate with that `candidate`. This could be pulled from your database, or
+assigned some other way (even manually!)
+
 Ballots are cast with three choices, and each slot of the ballot is assigned
 incrementally decreasing weights: the first choice gets a weight of 10, the next
 gets a weight of 5, and the last gets a weight of 1.
@@ -42,6 +46,24 @@ Ballots are stored and represented like this:
 > )
 > ``` 
 
+The first parameter of the Ballot initializer is the id that you'd like to
+associate with that particular ballot.
+
+The next is the `voter_id` of the individual doing the voting.
+
+The final parameter is an array of `id`'s that correlate to candidate `id`'s.
+
+For example, given these candidates:
+
+> ```
+> bob = Voting::Candidate.new(1)
+> sue = Voting::Candidate.new(2)
+> sally = Voting::Candidate.new(3)
+> ```
+
+Your ballots would resemble the one from the Ballot code example with a
+`choices` array containing `id`'s from 1 to 3
+
 After all of the ballots are cast, or even as they are still being turned in,
 the DPRM is able to get results back:
 
@@ -55,3 +77,12 @@ the DPRM is able to get results back:
 
 The `winner` variable there will contain the `Candidate` object of the winning
 `Candidate`!
+
+# Installation
+
+*Bundler*
+> 1. Add `gem 'voting', :github => 'dydx/voting'` to your Gemile
+> 2. `bundle install`
+> 3. require 'voting'
+> 4. ???
+> 5. Take over the world
