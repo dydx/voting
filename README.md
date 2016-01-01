@@ -62,7 +62,9 @@ For example, given these candidates:
 > ```
 
 Your ballots would resemble the one from the Ballot code example with a
-`choices` array containing `id`'s from 1 to 3
+`choices` array containing `id`'s from 1 to 3. The order of this array is
+important, and is both defined by the voter and then used to calculate the
+runoff.
 
 After all of the ballots are cast, or even as they are still being turned in,
 the DPRM is able to get results back:
